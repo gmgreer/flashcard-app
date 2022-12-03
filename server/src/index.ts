@@ -1,3 +1,5 @@
+import {config} from 'dotenv'
+config()
 import express from "express";
 import { Response, Request } from "express";
 import mongoose from 'mongoose'
@@ -20,7 +22,7 @@ app.post("/decks", async (req: Request, res: Response) => {
  
 })
 
-mongoose.connect("mongodb+srv://gmgreer:rtTuGWyWKAGqVcVa@cluster0.edash7g.mongodb.net/?retryWrites=true&w=majority")
+mongoose.connect(process.env.MONGO_URL!)
 .then(()=>{
     console.log(`listening on port ${PORT}`)
     app.listen(PORT);
