@@ -3,23 +3,25 @@ config()
 import express from "express";
 import { Response, Request } from "express";
 import mongoose from 'mongoose'
-import DeckModel from './models/Deck'
+import Deck from './models/Deck'
+import cors from "cors"
 const PORT = 5000
 
 const app = express()
-
+app.use(cors())
 app.use(express.json())
 
-
+app.get('/decks', async (req: Request, res: Response) => {
+    const decks = await Deck.find()
+    res.json(decks)   
+})
 
 app.post("/decks", async (req: Request, res: Response) => {
-    const newDeck = new DeckModel({
+    const newDeck = new Deck({
         title: req.body.title
     });
     const createdDeck = await newDeck.save()
         res.json(createdDeck)
-
- 
 })
 
 mongoose.connect(process.env.MONGO_URL!)
