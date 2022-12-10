@@ -8,6 +8,7 @@ import {
   Route,
 } from "react-router-dom";
 import Deck from './components/Deck';
+import Header from './components/Header';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
+    <Header></Header>
     <RouterProvider router={router} />
   </React.StrictMode>
 )

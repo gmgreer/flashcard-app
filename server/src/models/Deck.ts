@@ -3,8 +3,12 @@ const { Schema } = mongoose;
 
 
 const DeckSchema = new Schema({
-  title:  String, // String is shorthand for {type: String}
-
+    title:  String, 
+    cards: [
+        {
+            front: String,
+            back: String
+        }],
 });
 
 const DeckModel = mongoose.model("Deck", DeckSchema)
