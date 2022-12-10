@@ -1,7 +1,13 @@
 import { API_URL } from "./config"
 
+export type card = {
+  front: string,
+  back: string
+}
+
 export type TDeck = {
     _id: string
+    cards: [card]
     title: string
   }
 

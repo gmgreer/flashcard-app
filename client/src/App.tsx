@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { createDeck } from './api/createDeck'
 import { deleteDeck } from './api/deleteDeck'
 import { TDeck, getDecks } from './api/getDecks'
-
-
 import './App.css'
-
 
 
 function App() {
@@ -14,16 +12,8 @@ function App() {
   
   const handleCreateDeck = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:5000/decks', {
-      method: "POST",
-      body: JSON.stringify({
-        title,
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-    const deck = await response.json()
+
+    const deck = await createDeck(title)
     setDecks([...decks, deck])
     setTitle("")
   }
@@ -45,12 +35,13 @@ function App() {
 
 
   return (
-    <div className='bg-slate-500 h-screen flex flex-col justify-center items-center '>
+    <div className='bg-gray-900 h-screen flex flex-col justify-center gap-20 items-center text-white'>
+      <h1 className='text-8xl'>Decks</h1>
       <div>
         <ul className='flex flex-row flex-wrap gap-5 items-center justify-center mb-5'>
 
         {decks.map(deck => (
-          <li className='border flex justify-center items-center border-black h-[125px] w-[200px] text-center bg-white shadow-md relative' key={deck._id}>
+          <li className='border text-black flex justify-center items-center border-black h-[125px] w-[200px] text-center bg-white shadow-md relative' key={deck._id}>
             
             <button 
             onClick={() => handleDeleteDeck(deck._id)}
